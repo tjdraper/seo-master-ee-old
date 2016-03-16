@@ -78,8 +78,8 @@ class Seomaster_ft extends EE_Fieldtype
 	public function save_settings($data)
 	{
 		// Load the controller and process the data
-		$standardSave = new Controller\FieldSettingsSave();
-		return $standardSave->process($data);
+		$fieldSettingsSave = new Controller\FieldSettingsSave();
+		return $fieldSettingsSave->process($data);
 	}
 
 	/**
@@ -90,7 +90,12 @@ class Seomaster_ft extends EE_Fieldtype
 	 */
 	public function display_field($data)
 	{
-		return 'here';
+		$fieldSettings = $this->settings;
+		$fieldSettings['content_id'] = $this->content_id;
+
+		// Load the controller and render
+		$displayField = new Controller\DisplayField();
+		return $displayField->render($fieldSettings, $data);
 	}
 
 	/**

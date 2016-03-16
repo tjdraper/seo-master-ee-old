@@ -13,7 +13,7 @@ spl_autoload_register(function ($class) {
 	$ns = explode('\\', $class);
 
 	// Make sure this request is for us
-	if ("{$ns[0]}\{$ns[1]}" !== SEOMASTER_NAMESPACE) {
+	if (count($ns) > 2 && "{$ns[0]}\\{$ns[1]}" !== SEOMASTER_NAMESPACE) {
 		return;
 	}
 

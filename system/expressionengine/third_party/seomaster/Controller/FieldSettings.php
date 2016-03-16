@@ -108,7 +108,7 @@ class FieldSettings
 				'min' => 1,
 				'placeholder' => lang('field_setting_title_max_length'),
 				'id' => 'seomaster_title_max_length',
-				'value' => $this->title_max_length
+				'value' => $this->title_max_length ?: 60
 			))
 		);
 
@@ -142,7 +142,7 @@ class FieldSettings
 				'min' => 1,
 				'placeholder' => lang('field_setting_description_max_length'),
 				'id' => 'seomaster_description_max_length',
-				'value' => $this->description_max_length
+				'value' => $this->description_max_length ?: 160
 			))
 		);
 

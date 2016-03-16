@@ -1,6 +1,6 @@
 {
-	"addOnDir": "system/user/addons/seomaster",
-	"themesDir": "themes/user/seomaster",
+	"addOnDir": "system/expressionengine/third_party/seomaster",
+	"themesDir": "themes/third_party/seomaster",
 	"cssDir": "css",
 	"jsDir": "js",
 	"cssFile": "style.min.css",

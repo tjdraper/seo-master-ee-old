@@ -39,4 +39,4 @@
 	$(function() {
 		runFAB();
 	});
-})(window.SIMPLETAG);
+})(window.SEOMASTER);

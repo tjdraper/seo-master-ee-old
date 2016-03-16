@@ -45,4 +45,4 @@
 			return fn;
 		}
 	};
-})(window.SIMPLETAG);
+})(window.SEOMASTER);

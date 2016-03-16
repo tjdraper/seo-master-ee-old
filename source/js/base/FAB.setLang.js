@@ -43,4 +43,4 @@
 	$(function() {
 		runLang();
 	});
-})(window.SIMPLETAG);
+})(window.SEOMASTER);

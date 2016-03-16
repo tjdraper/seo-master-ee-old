@@ -1,5 +1,9 @@
 (function(F) {
 	'use strict';
 
-	F.controller = {};
+	F.controller = {
+		fieldSettings: [
+			'chosen'
+		]
+	};
 })(window.SEOMASTER);

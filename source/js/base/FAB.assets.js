@@ -112,4 +112,4 @@
 			new Load(options); // jshint ignore: line
 		}
 	};
-})(window.SIMPLETAG, document);
+})(window.SEOMASTER, document);

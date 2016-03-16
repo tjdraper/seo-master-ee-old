@@ -72,4 +72,4 @@
 	$(function() {
 		runVars();
 	});
-})(window.SIMPLETAG);
+})(window.SEOMASTER);

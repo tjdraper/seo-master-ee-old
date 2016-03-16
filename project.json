@@ -16,6 +16,7 @@
 	"jsBuild": [
 	],
 	"jsFiles": {
+		"chosen.jquery.min.js": "js/lib/chosen.jquery.js"
 	},
 	"sourceMaps": true
 }

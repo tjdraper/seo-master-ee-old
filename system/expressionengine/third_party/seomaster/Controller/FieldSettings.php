@@ -22,9 +22,27 @@ class FieldSettings
 	 */
 	public function __construct($data)
 	{
+		// Set data
 		foreach ($data as $key => $val) {
 			$this->{$key} = $val;
 		}
+
+		// Set page type to fieldSettings
+		ee()->javascript->output(
+			"window.SEOMASTER = window.SEOMASTER || {};" .
+			"window.SEOMASTER.vars = window.SEOMASTER.vars || {};" .
+			"window.SEOMASTER.vars.pageType = 'fieldSettings';"
+		);
+
+		// Add Chosen CSS
+		$css = URL_THIRD_THEMES . 'seomaster/css/chosen.min.css';
+		ee()->cp->add_to_head("<link rel=\"stylesheet\" href=\"{$css}\">");
+
+		// Add Chosen JS
+		$js = URL_THIRD_THEMES . 'seomaster/js/chosen.jquery.min.js';
+		ee()->cp->add_to_foot(
+			"<script type=\"text/javascript\" src=\"{$js}\"></script>"
+		);
 	}
 
 	/**

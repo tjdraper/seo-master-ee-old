@@ -77,7 +77,9 @@ class Seomaster_ft extends EE_Fieldtype
 	 */
 	public function save_settings($data)
 	{
-		return array();
+		// Load the controller and process the data
+		$standardSave = new Controller\FieldSettingsSave();
+		return $standardSave->process($data);
 	}
 
 	/**

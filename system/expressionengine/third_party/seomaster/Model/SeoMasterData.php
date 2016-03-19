@@ -29,6 +29,8 @@ class SeoMasterData extends Model
 		'id' => 'int',
 		'site_id' => 'int',
 		'entry_id' => 'int',
+		'no_index' => 'bool',
+		'use_title_suffix' => 'bool',
 		'title' => 'string',
 		'description' => 'string',
 		'image' => 'string'

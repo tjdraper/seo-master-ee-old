@@ -47,6 +47,12 @@ class Model
 				$fields[$key] = array(
 					'type' => 'TEXT'
 				);
+			} elseif ($val === 'bool') {
+				$fields[$key] = array(
+					'type' => 'CHAR',
+					'length' => 1,
+					'default' => 'n'
+				);
 			}
 		}
 

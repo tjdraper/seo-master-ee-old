@@ -12,6 +12,7 @@
 namespace BuzzingPixel\SeoMaster\Controller;
 
 use BuzzingPixel\SeoMaster\Service\Data\FieldSettings;
+use BuzzingPixel\SeoMaster\Service\Data\FieldData;
 
 class DisplayField
 {
@@ -26,7 +27,10 @@ class DisplayField
 		$fieldSettings = new FieldSettings($fieldSettings);
 
 		// Get existing field data
-		$fieldData = array();
+		$fieldData = new FieldData();
+
+		// var_dump($fieldSettings);
+		// die;
 
 		return ee()->load->view(
 			'field',

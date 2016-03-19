@@ -49,7 +49,7 @@ class Installer
 	 */
 	public function uninstall()
 	{
-		// Uninstall TagIndex model
+		// Uninstall SeoMasterData model
 		$this->seoMasterData->uninstall();
 
 		// Remove Module

@@ -4,6 +4,9 @@
 	F.controller = {
 		fieldSettings: [
 			'chosen'
+		],
+		fieldType: [
+			'charLimit'
 		]
 	};
 })(window.SEOMASTER);

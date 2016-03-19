@@ -78,41 +78,28 @@ class FieldSettings
 			$uploadDropdown[$dir['id']] = $dir['name'];
 		}
 
-		// Add Display Title Suffix row
-		$this->display_title = $this->display_title ?: 'y';
+		// Display Indexing Options row
+		$this->display_indexing = $this->display_indexing ?: 'y';
 
 		ee()->table->add_row(
-			lang('field_setting_display_title', 'seomaster_display_title'),
+			lang('field_setting_display_indexing', 'seomaster_display_indexing'),
 			form_radio(array(
-				'name' => 'seomaster_display_title',
-				'id' => 'seomaster_display_title_yes',
+				'name' => 'seomaster_display_indexing',
+				'id' => 'seomaster_display_indexing_yes',
 				'value' => 'y',
-				'checked' => $this->display_title === 'y'
+				'checked' => $this->display_indexing === 'y'
 			)) .
-			"<label for=\"seomaster_display_title_yes\" class=\"seomaster-radio-label\">{$yes}</label>" .
+			"<label for=\"seomaster_display_indexing_yes\" class=\"seomaster-radio-label\">{$yes}</label>" .
 			form_radio(array(
-				'name' => 'seomaster_display_title',
-				'id' => 'seomaster_display_title_no',
+				'name' => 'seomaster_display_indexing',
+				'id' => 'seomaster_display_indexing_no',
 				'value' => 'n',
-				'checked' => $this->display_title !== 'y'
+				'checked' => $this->display_indexing !== 'y'
 			)) .
-			"<label for=\"seomaster_display_title_no\" class=\"seomaster-radio-label\">{$no}</label>"
+			"<label for=\"seomaster_display_indexing_no\" class=\"seomaster-radio-label\">{$no}</label>"
 		);
 
-		// Add Title Max Length row
-		ee()->table->add_row(
-			lang('field_setting_title_max_length', 'seomaster_title_max_length'),
-			form_input(array(
-				'name' => 'seomaster_title_max_length',
-				'type' => 'number',
-				'min' => 1,
-				'placeholder' => lang('field_setting_title_max_length'),
-				'id' => 'seomaster_title_max_length',
-				'value' => $this->title_max_length ?: 60
-			))
-		);
-
-		// Add Display Title Suffix row
+		// Display Title Suffix row
 		$this->display_title_suffix = $this->display_title_suffix ?: 'y';
 
 		ee()->table->add_row(
@@ -133,7 +120,62 @@ class FieldSettings
 			"<label for=\"seomaster_display_title_suffix_no\" class=\"seomaster-radio-label\">{$no}</label>"
 		);
 
-		// Add Description Max Length row
+		// Display Title row
+		$this->display_title = $this->display_title ?: 'y';
+
+		ee()->table->add_row(
+			lang('field_setting_display_title', 'seomaster_display_title'),
+			form_radio(array(
+				'name' => 'seomaster_display_title',
+				'id' => 'seomaster_display_title_yes',
+				'value' => 'y',
+				'checked' => $this->display_title === 'y'
+			)) .
+			"<label for=\"seomaster_display_title_yes\" class=\"seomaster-radio-label\">{$yes}</label>" .
+			form_radio(array(
+				'name' => 'seomaster_display_title',
+				'id' => 'seomaster_display_title_no',
+				'value' => 'n',
+				'checked' => $this->display_title !== 'y'
+			)) .
+			"<label for=\"seomaster_display_title_no\" class=\"seomaster-radio-label\">{$no}</label>"
+		);
+
+		// Title Max Length row
+		ee()->table->add_row(
+			lang('field_setting_title_max_length', 'seomaster_title_max_length'),
+			form_input(array(
+				'name' => 'seomaster_title_max_length',
+				'type' => 'number',
+				'min' => 1,
+				'placeholder' => lang('field_setting_title_max_length'),
+				'id' => 'seomaster_title_max_length',
+				'value' => $this->title_max_length ?: 60
+			))
+		);
+
+		// Display Discription row
+		$this->display_description = $this->display_description ?: 'y';
+
+		ee()->table->add_row(
+			lang('field_setting_display_description', 'seomaster_display_description'),
+			form_radio(array(
+				'name' => 'seomaster_display_description',
+				'id' => 'seomaster_display_description_yes',
+				'value' => 'y',
+				'checked' => $this->display_description === 'y'
+			)) .
+			"<label for=\"seomaster_display_description_yes\" class=\"seomaster-radio-label\">{$yes}</label>" .
+			form_radio(array(
+				'name' => 'seomaster_display_description',
+				'id' => 'seomaster_display_description_no',
+				'value' => 'n',
+				'checked' => $this->display_description !== 'y'
+			)) .
+			"<label for=\"seomaster_display_description_no\" class=\"seomaster-radio-label\">{$no}</label>"
+		);
+
+		// Description Max Length row
 		ee()->table->add_row(
 			lang('field_setting_description_max_length', 'seomaster_description_max_length'),
 			form_input(array(
@@ -146,7 +188,7 @@ class FieldSettings
 			))
 		);
 
-		// Add Display Share Image row
+		// Display Share Image row
 		$this->display_share_image = $this->display_share_image ?: 'y';
 
 		ee()->table->add_row(

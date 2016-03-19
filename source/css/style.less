@@ -14,7 +14,19 @@
 	# General
 \*------------------------------------*/
 
+.seomaster-btn {
+	.background(#f5f6f5);
+	.border(darken(#f5f6f5, 8%));
+	.cursor();
+	.inline-block();
+	.padding(6px; 10px);
+	.rounded(3px);
+	&:hover {
+		.background(darken(#f5f6f5, 8%));
+	}
+}
 .seomaster-radio-label {
+	.inline() !important;
 	.margin(horizontal; 2px; 18px);
 }
 .seomaster-settings-input {
@@ -22,4 +34,28 @@
 }
 #mainContent .pageContents {
 	.overflow(visible);
+}
+.seomaster-field {
+	.margin(top; 10px);
+	&__label {
+		.bold() !important;
+	}
+	&__input-explain {
+		.font-weight(normal) !important;
+		.spaced(4px);
+	}
+	&__input-wrapper {
+		.spaced(20px);
+	}
+}
+.seomaster-count {
+	.font-size(10px);
+	.margin(8px; false; 8px; 2px);
+	&--warning {
+		.bold();
+		.color(#b49502);
+	}
+	&--limit-reached {
+		.color(#b41302);
+	}
 }

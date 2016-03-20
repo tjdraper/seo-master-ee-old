@@ -139,8 +139,17 @@ class Seomaster_ft extends EE_Fieldtype
 	 * @param array $tagParams
 	 * @return string
 	 */
-	public function replace_tag($fieldData = false, $tagParams = array(), $tagData = false)
+	public function replace_tag(
+		$fieldData = false,
+		$tagParams = array(),
+		$tagData = false
+	)
 	{
-		return '';
+		$tagParams = $tagParams ?: array();
+		$tagParams['site_id'] = ee()->config->item('site_id');
+		$tagParams['entry_id'] = $this->content_id;
+
+		$field = new Controller\Tag();
+		return $field->data($tagParams, $tagData);
 	}
 }

@@ -12,6 +12,25 @@ include_once(PATH_THIRD . 'seomaster/addon.setup.php');
  * @copyright Copyright (c) 2016, BuzzingPixel, LLC
  */
 
+use BuzzingPixel\SeoMaster\Controller;
+
 class Seomaster
 {
+	/**
+	 * Data tag
+	 *
+	 * @return string
+	 */
+	public function data()
+	{
+		$tagParams = ee()->TMPL->tagparams ?: array();
+		$tagData = ee()->TMPL->tagdata ?: '';
+
+		if (! isset($tagParams['side_id'])) {
+			$tagParams['site_id'] = ee()->config->item('site_id');
+		}
+
+		$field = new Controller\Tag();
+		return $field->data($tagParams, $tagData);
+	}
 }

@@ -45,6 +45,8 @@ class Tag
 
 		if ($entry_id = $tagParams->entry_id) {
 			$model->filter('entry_id', 'IN', $entry_id);
+		} else {
+			$model->filter('entry_id', null);
 		}
 
 		if ($no_index = $tagParams->no_index) {

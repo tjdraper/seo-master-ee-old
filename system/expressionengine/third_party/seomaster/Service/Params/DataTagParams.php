@@ -27,6 +27,8 @@ class DataTagParams extends BaseParams
 	protected $description_override = 'string';
 	protected $description_fallback = 'string';
 	protected $seo_title_suffix_override = 'string';
+	protected $image_override = 'string';
+	protected $image_fallback = 'string';
 	protected $twitter_card = 'string';
 	protected $twitter_site = 'string';
 }

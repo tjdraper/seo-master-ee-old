@@ -11,6 +11,8 @@
 
 namespace BuzzingPixel\SeoMaster\Service\Data;
 
+use BuzzingPixel\SeoMaster\Model\Model;
+
 class DataTagData extends Base
 {
 	/**
@@ -23,6 +25,12 @@ class DataTagData extends Base
 		\BuzzingPixel\SeoMaster\Service\Params\DataTagParams $tagParams
 	)
 	{
+		if ($model->image && ! $tagParams->image_override) {
+			$image = 'image goes here';
+		} else {
+			$image = null;
+		}
+
 		$data = array(
 			'no_index' => $tagParams->no_index_override ||
 				$model->no_index_override ||
@@ -34,7 +42,8 @@ class DataTagData extends Base
 				($model->title ?: $tagParams->title_fallback),
 			'description' => $tagParams->description_override ?:
 				($model->description ?: $tagParams->description_fallback),
-			'image' => false,
+			'image' => $tagParams->image_override ?:
+				($image ?: $tagParams->image_fallback),
 			'seo_title_suffix' => $tagParams->seo_title_suffix_override ?:
 				' | ' . ee()->config->item('site_name'),
 			'twitter_card' => $tagParams->twitter_card,

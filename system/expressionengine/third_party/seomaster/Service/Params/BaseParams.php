@@ -21,6 +21,7 @@ abstract class BaseParams
 		// Loop through the params and set them
 		foreach ($this as $key => $val) {
 			$param = isset($params[$key]) ? $params[$key] : null;
+			$param = preg_replace('/^{.*?}/', '', $param);
 
 			// If the param is not set, check if there is a fallback
 			if (

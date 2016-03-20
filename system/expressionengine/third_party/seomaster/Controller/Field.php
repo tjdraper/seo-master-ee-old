@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEO Master DisplayField controller
+ * SEO Master Field controller
  *
  * @package seomaster
  * @author TJ Draper <tj@buzzingpixel.com>
@@ -15,7 +15,7 @@ use BuzzingPixel\SeoMaster\Service\Data\FieldSettings;
 use BuzzingPixel\SeoMaster\Service\Data\FieldData;
 use BuzzingPixel\SeoMaster\Model\Model;
 
-class DisplayField
+class Field
 {
 	/**
 	 * Render the field

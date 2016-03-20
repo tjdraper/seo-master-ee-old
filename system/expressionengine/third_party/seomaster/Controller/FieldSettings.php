@@ -20,29 +20,12 @@ class FieldSettings
 	 *
 	 * @param array $data
 	 */
-	public function __construct($data)
+	public function __construct($data = array())
 	{
 		// Set data
 		foreach ($data as $key => $val) {
 			$this->{$key} = $val;
 		}
-
-		// Set page type to fieldSettings
-		ee()->javascript->output(
-			"window.SEOMASTER = window.SEOMASTER || {};" .
-			"window.SEOMASTER.vars = window.SEOMASTER.vars || {};" .
-			"window.SEOMASTER.vars.pageType = 'fieldSettings';"
-		);
-
-		// Add Chosen CSS
-		$css = URL_THIRD_THEMES . 'seomaster/css/chosen.min.css';
-		ee()->cp->add_to_head("<link rel=\"stylesheet\" href=\"{$css}\">");
-
-		// Add Chosen JS
-		$js = URL_THIRD_THEMES . 'seomaster/js/chosen.jquery.min.js';
-		ee()->cp->add_to_foot(
-			"<script type=\"text/javascript\" src=\"{$js}\"></script>"
-		);
 	}
 
 	/**
@@ -62,6 +45,23 @@ class FieldSettings
 	 */
 	public function render()
 	{
+		// Set page type to fieldSettings
+		ee()->javascript->output(
+			"window.SEOMASTER = window.SEOMASTER || {};" .
+			"window.SEOMASTER.vars = window.SEOMASTER.vars || {};" .
+			"window.SEOMASTER.vars.pageType = 'fieldSettings';"
+		);
+
+		// Add Chosen CSS
+		$css = URL_THIRD_THEMES . 'seomaster/css/chosen.min.css';
+		ee()->cp->add_to_head("<link rel=\"stylesheet\" href=\"{$css}\">");
+
+		// Add Chosen JS
+		$js = URL_THIRD_THEMES . 'seomaster/js/chosen.jquery.min.js';
+		ee()->cp->add_to_foot(
+			"<script type=\"text/javascript\" src=\"{$js}\"></script>"
+		);
+
 		// Get lang
 		$yes = lang('yes');
 		$no = lang('no');
@@ -219,5 +219,24 @@ class FieldSettings
 				"class=\"js-seomaster-chosen\" id=\"seomaster_share_image_upload_dir\""
 			)
 		);
+	}
+
+	/**
+	 * Save FieldSettings
+	 *
+	 * @param array $data
+	 * @return array
+	 */
+	public function save($data)
+	{
+		$saveData = array();
+
+		foreach($data as $saveKey => $save) {
+			if (strncmp('seomaster_', $saveKey, 10) === 0) {
+				$saveData[substr($saveKey, 10)] = $save;
+			}
+		}
+
+		return $saveData;
 	}
 }

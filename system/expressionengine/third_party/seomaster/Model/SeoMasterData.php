@@ -27,7 +27,7 @@ class SeoMasterData extends Base
 	protected $image;
 
 	// Typed columns
-	protected static $_typed_columns = array(
+	public static $_typed_columns = array(
 		'id' => 'int',
 		'site_id' => 'int',
 		'entry_id' => 'int',

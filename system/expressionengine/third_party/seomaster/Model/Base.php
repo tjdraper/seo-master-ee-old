@@ -41,7 +41,10 @@ abstract class Base implements \Iterator
 	 */
 	public function __get($name)
 	{
-		if (property_exists($this, $name) && strpos($this->{$name}, '_') !== 0) {
+		if (
+			property_exists($this, $name) &&
+			strpos($this->{$name}, '_') !== 0
+		) {
 			return $this->{$name};
 		}
 	}
@@ -54,7 +57,10 @@ abstract class Base implements \Iterator
 	 */
 	public function __set($name, $value)
 	{
-		if ($name === 'id' && $this->id !== null && ! property_exists($this, 'deleted')) {
+		if (
+			$name === 'id' && $this->id !== null &&
+			! property_exists($this, 'deleted')
+		) {
 			return;
 		}
 

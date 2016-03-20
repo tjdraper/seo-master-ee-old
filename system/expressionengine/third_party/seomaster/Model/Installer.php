@@ -30,7 +30,7 @@ class Installer
 
 		$fields = array();
 
-		foreach ($modelClass::$_table_name as $key => $val) {
+		foreach ($modelClass::$_typed_columns as $key => $val) {
 			if ($key === 'id') {
 				continue;
 			}

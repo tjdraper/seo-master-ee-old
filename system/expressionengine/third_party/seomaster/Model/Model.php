@@ -11,8 +11,6 @@
 
 namespace BuzzingPixel\SeoMaster\Model;
 
-use BuzzingPixel\SeoMaster\Service\ModelCollection;
-
 class Model
 {
 	private $modelName;
@@ -133,13 +131,13 @@ class Model
 	/**
 	 * Get all results
 	 *
-	 * @return object ModelCollection
+	 * @return object Collection
 	 */
 	public function all()
 	{
 		$models = $this->runQuery();
 
-		return new ModelCollection($models);
+		return new Collection($models);
 	}
 
 	/**

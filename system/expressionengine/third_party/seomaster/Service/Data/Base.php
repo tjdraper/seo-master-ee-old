@@ -11,7 +11,7 @@
 
 namespace BuzzingPixel\SeoMaster\Service\Data;
 
-class Base
+abstract class Base
 {
 	protected $properties;
 

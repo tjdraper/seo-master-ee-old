@@ -30,10 +30,6 @@ class Seomaster_ft extends EE_Fieldtype
 	 */
 	public function __construct()
 	{
-		// $seoMasterData = new BuzzingPixel\SeoMaster\Model\SeoMasterData();
-		// $seoMasterData->uninstall();
-		// $seoMasterData->install();
-
 		// Make sure SeoMaster is really being requested and we're in the CP
 		if (
 			REQ === 'CP' &&

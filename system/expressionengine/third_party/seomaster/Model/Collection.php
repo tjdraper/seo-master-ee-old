@@ -9,11 +9,11 @@
  * @copyright Copyright (c) 2016, BuzzingPixel, LLC
  */
 
-namespace BuzzingPixel\SeoMaster\Service;
+namespace BuzzingPixel\SeoMaster\Model;
 
 use BuzzingPixel\SeoMaster\Helper\Table;
 
-class ModelCollection implements \ArrayAccess, \Iterator, \Countable
+class Collection implements \ArrayAccess, \Iterator, \Countable
 {
 	private $position = 0;
 	protected $items = array();

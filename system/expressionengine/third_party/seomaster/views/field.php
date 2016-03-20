@@ -1,5 +1,11 @@
 <div class="seomaster-field" data-set="pageType" data-value="fieldType">
 
+	<input
+		type="hidden"
+		name="<?= $fieldSettings->field_name ?>[entry_id]"
+		value="<?= $fieldData->entry_id ?>"
+	>
+
 	<?php // No Index ?>
 	<?php if ($fieldSettings->display_indexing) { ?>
 		<div class="seomaster-field__input-wrapper">

@@ -11,7 +11,7 @@
 
 namespace BuzzingPixel\SeoMaster\Model;
 
-class SeoMasterData extends \BuzzingPixel\SeoMaster\Service\Model
+class SeoMasterData extends Base
 {
 	// Metadata
 	public static $_table_name = 'seomaster_data';

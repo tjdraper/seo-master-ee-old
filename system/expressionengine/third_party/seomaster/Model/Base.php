@@ -9,11 +9,11 @@
  * @copyright Copyright (c) 2016, BuzzingPixel, LLC
  */
 
-namespace BuzzingPixel\SeoMaster\Service;
+namespace BuzzingPixel\SeoMaster\Model;
 
 use BuzzingPixel\SeoMaster\Helper\Table;
 
-class Model implements \Iterator
+abstract class Base implements \Iterator
 {
 	private $position = 0;
 	private $itteratorKeys = array();

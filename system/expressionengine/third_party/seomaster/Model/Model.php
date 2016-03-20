@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEO Master Model base
+ * SEO Master Model
  *
  * @package seomaster
  * @author TJ Draper <tj@buzzingpixel.com>
@@ -11,63 +11,195 @@
 
 namespace BuzzingPixel\SeoMaster\Model;
 
-use BuzzingPixel\SeoMaster\Helper\Table;
+use BuzzingPixel\SeoMaster\Service\ModelCollection;
 
 class Model
 {
-	// Metadata
-	protected static $_primary_key = 'id';
-	protected static $_table_name = null;
+	private $modelName;
+	private $filters = array();
+	private $ordering = array();
+	private $limit;
 
-	// Typed columns
-	protected static $_typed_columns = array();
+	private $filterMap = array(
+		'==' => 'where',
+		'!=' => 'where',
+		'<' => 'where',
+		'>' => 'where',
+		'<=' => 'where',
+		'>=' => 'where',
+		'IN' => 'where_in',
+		'NOT IN' => 'where_not_in'
+	);
 
 	/**
-	 * Install model
+	 * Model constructor
+	 *
+	 * $param string $name The name of the model to get
 	 */
-	public function install()
+	public function __construct($name = null)
 	{
-		if (ee()->db->table_exists(static::$_table_name)) {
-			return;
-		}
-
-		$fields = array();
-
-		foreach (static::$_typed_columns as $key => $val) {
-			if ($key === 'id') {
-				continue;
-			}
-
-			if ($val === 'int') {
-				$fields[$key] = array(
-					'type' => 'INT',
-					'unsigned' => true
-				);
-			} elseif ($val === 'string') {
-				$fields[$key] = array(
-					'type' => 'TEXT'
-				);
-			} elseif ($val === 'bool') {
-				$fields[$key] = array(
-					'type' => 'CHAR',
-					'length' => 1,
-					'default' => 'n'
-				);
-			}
-		}
-
-		Table::insert($fields, static::$_table_name);
+		$this->modelName = $name;
 	}
 
 	/**
-	 * Uninstall model
+	 * Get a model
+	 *
+	 * @param string $name The name of the model to get
+	 * @return self
 	 */
-	public function uninstall()
+	public function get($name)
 	{
-		if (! ee()->db->table_exists(static::$_table_name)) {
-			return;
+		$this->modelName = $name;
+		return $this;
+	}
+
+	/**
+	 * Filter the model
+	 *
+	 * @param string $filterOn
+	 * @param mixed $condition
+	 * @param mixed $value
+	 * @return self
+	 */
+	public function filter($filterOn, $condition, $value = null)
+	{
+		// Check if $condition is a condition or a value
+		if ($value === null) {
+			$value = $condition;
+			$condition = '==';
 		}
 
-		Table::remove(static::$_table_name);
+		if (! isset($this->filterMap[$condition])) {
+			throw new \Exception('Conditional parameter not allowed');
+		}
+
+		$this->filters[] = compact(
+			'filterOn', 'condition', 'value'
+		);
+
+		return $this;
+	}
+
+	/**
+	 * Order the model
+	 *
+	 * @param string $by
+	 * @param string $sort
+	 * @return self
+	 */
+	public function order($by, $sort = 'DESC')
+	{
+		$this->ordering[] = compact(
+			'by',
+			'sort'
+		);
+
+		return $this;
+	}
+
+	/**
+	 * Set model limit
+	 *
+	 * @param int $limit
+	 * @return self
+	 */
+	public function limit($limit)
+	{
+		$this->limit = $limit;
+
+		return $this;
+	}
+
+	/**
+	 * Get first result
+	 *
+	 * @return object
+	 */
+	public function first()
+	{
+		$this->limit = 1;
+
+		$models = $this->runQuery();
+
+		if (! $models) {
+			$modelClass = '\BuzzingPixel\SeoMaster\Model\\' . $this->modelName;
+
+			return new $modelClass();
+		}
+
+		return $models[0];
+	}
+
+	/**
+	 * Get all results
+	 *
+	 * @return object ModelCollection
+	 */
+	public function all()
+	{
+		$models = $this->runQuery();
+
+		return new ModelCollection($models);
+	}
+
+	/**
+	 * Run the query
+	 */
+	private function runQuery()
+	{
+		// Get the table name
+		$modelClass = '\BuzzingPixel\SeoMaster\Model\\' . $this->modelName;
+		$tableName = $modelClass::$_table_name;
+
+		// Start the query
+		ee()->db->select('*')
+			->from($tableName);
+
+		// Apply filters
+		foreach ($this->filters as $filter) {
+			if ($this->filterMap[$filter['condition']] === 'where') {
+				if ($filter['condition'] === '==') {
+					ee()->db->where($filter['filterOn'], $filter['value']);
+				} else {
+					ee()->db->where(
+						$filter['filterOn'] . ' ' . $filter['condition'],
+						$filter['value']
+					);
+				}
+			} else {
+				ee()->db->{$this->filterMap[$filter['condition']]}(
+					$filter['filterOn'],
+					$filter['value']
+				);
+			}
+		}
+
+		// Apply ordering
+		foreach ($this->ordering as $ordering) {
+			ee()->db->order_by($ordering['by'], $ordering['sort']);
+		}
+
+		// Apply limit
+		if ($this->limit) {
+			ee()->db->limit($this->limit);
+		}
+
+		// Get the result
+		$result = ee()->db->get()->result();
+
+		$models = array();
+
+		// Get a model of each result
+		foreach ($result as $data) {
+			$model = new $modelClass();
+
+			foreach ($data as $key => $item) {
+				$model->{$key} = $item;
+			}
+
+			$models[] = $model;
+		}
+
+		return $models;
 	}
 }

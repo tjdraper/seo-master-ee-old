@@ -94,8 +94,8 @@ class Seomaster_ft extends EE_Fieldtype
 		$fieldSettings['content_id'] = $this->content_id;
 
 		// Load the controller and render
-		$field = new Controller\Field();
-		return $field->render($fieldSettings, $data);
+		$field = new Controller\Field($fieldSettings);
+		return $field->render();
 	}
 
 	/**
@@ -106,17 +106,30 @@ class Seomaster_ft extends EE_Fieldtype
 	 */
 	public function save($data)
 	{
-		return '';
+		// Get a unique ID
+		$uniqueId = uniqid();
+
+		// Cache the data for use in post_save
+		ee()->session->set_cache('seomaster', 'post_data', $data);
+
+		return $uniqueId;
 	}
 
 	/**
 	 * Save field data to SeoMaster table
 	 *
-	 * @param string $uniqueId
+	 * @param string $data
 	 */
-	public function post_save($uniqueId)
+	public function post_save($data)
 	{
-		return '';
+		$data = ee()->session->cache('seomaster', 'post_data', $data);
+
+		$fieldSettings = $this->settings;
+		$fieldSettings['content_id'] = $this->content_id;
+
+		// Load the controller and render
+		$field = new Controller\Field($fieldSettings);
+		return $field->save($data);
 	}
 
 	/**

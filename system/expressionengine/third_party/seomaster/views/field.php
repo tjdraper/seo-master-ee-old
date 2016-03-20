@@ -1,11 +1,5 @@
 <div class="seomaster-field" data-set="pageType" data-value="fieldType">
 
-	<input
-		type="hidden"
-		name="<?= $fieldSettings->field_name ?>[entry_id]"
-		value="<?= $fieldData->entry_id ?>"
-	>
-
 	<?php // No Index ?>
 	<?php if ($fieldSettings->display_indexing) { ?>
 		<div class="seomaster-field__input-wrapper">
@@ -14,20 +8,20 @@
 			</label>
 			<input
 				type="radio"
-				name="$fieldSettings->field_name ?>[no_index]"
+				name="<?= $fieldSettings->field_name ?>[no_index]"
 				value="n"
 				id="no_index_no"
-				<?php if ($fieldData->no_index === null || $fieldData->no_index === true) { ?>
+				<?php if ($fieldData->no_index === null || $fieldData->no_index === false) { ?>
 				checked
 				<?php } ?>
 			>
 			<label for="no_index_no" class="seomaster-radio-label"><?= lang('field_seo_no_index_index') ?></label>
 			<input
 				type="radio"
-				name="$fieldSettings->field_name ?>[no_index]"
+				name="<?= $fieldSettings->field_name ?>[no_index]"
 				value="y"
 				id="no_index_yes"
-				<?php if ($fieldData->no_index === false) { ?>
+				<?php if ($fieldData->no_index === true) { ?>
 				checked
 				<?php } ?>
 			>
@@ -43,7 +37,7 @@
 			</label>
 			<input
 				type="radio"
-				name="$fieldSettings->field_name ?>[use_title_suffix]"
+				name="<?= $fieldSettings->field_name ?>[use_title_suffix]"
 				value="y"
 				id="use_title_suffix_yes"
 				<?php if ($fieldData->use_title_suffix === null || $fieldData->use_title_suffix === true) { ?>
@@ -53,7 +47,7 @@
 			<label for="use_title_suffix_yes" class="seomaster-radio-label"><?= lang('yes') ?></label>
 			<input
 				type="radio"
-				name="$fieldSettings->field_name ?>[use_title_suffix]"
+				name="<?= $fieldSettings->field_name ?>[use_title_suffix]"
 				value="n"
 				id="use_title_suffix_no"
 				<?php if ($fieldData->use_title_suffix === false) { ?>

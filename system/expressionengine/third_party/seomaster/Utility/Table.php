@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEO Master Table helper
+ * SEO Master Table utility
  *
  * @package seomaster
  * @author TJ Draper <tj@buzzingpixel.com>
@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2016, BuzzingPixel, LLC
  */
 
-namespace BuzzingPixel\SeoMaster\Helper;
+namespace BuzzingPixel\SeoMaster\Utility;
 
 class Table
 {

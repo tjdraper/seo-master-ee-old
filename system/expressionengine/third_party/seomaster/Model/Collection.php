@@ -122,7 +122,8 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
 	/**
 	 * Required ArrayAccess Methods
 	 */
-	public function offsetSet($offset, $value) {
+	public function offsetSet($offset, $value)
+	{
 		if (is_null($offset)) {
 			$this->items[] = $value;
 		} else {
@@ -130,38 +131,46 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
 		}
 	}
 
-	public function offsetExists($offset) {
+	public function offsetExists($offset)
+	{
 		return isset($this->items[$offset]);
 	 }
 
-	public function offsetUnset($offset) {
+	public function offsetUnset($offset)
+	{
 		unset($this->items[$offset]);
 	}
 
-	public function offsetGet($offset) {
+	public function offsetGet($offset)
+	{
 		return isset($this->items[$offset]) ? $this->items[$offset] : null;
 	}
 
 	/**
 	 * Required Iterator methods
 	 */
-	public function current() {
+	public function current()
+	{
 		return $this->items[$this->position];
 	}
 
-	function key() {
+	function key()
+	{
 		return $this->position;
 	}
 
-	function next() {
+	function next()
+	{
 		++$this->position;
 	}
 
-	function rewind() {
+	function rewind()
+	{
 		$this->position = 0;
 	}
 
-	function valid() {
+	function valid()
+	{
 		return isset($this->items[$this->position]);
 	}
 

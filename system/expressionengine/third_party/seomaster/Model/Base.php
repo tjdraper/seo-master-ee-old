@@ -11,8 +11,6 @@
 
 namespace BuzzingPixel\SeoMaster\Model;
 
-use BuzzingPixel\SeoMaster\Helper\Table;
-
 abstract class Base implements \Iterator
 {
 	private $position = 0;
@@ -149,74 +147,30 @@ abstract class Base implements \Iterator
 	}
 
 	/**
-	 * Install model
-	 */
-	public function install()
-	{
-		if (ee()->db->table_exists(static::$_table_name)) {
-			return;
-		}
-
-		$fields = array();
-
-		foreach (static::$_typed_columns as $key => $val) {
-			if ($key === 'id') {
-				continue;
-			}
-
-			if ($val === 'int') {
-				$fields[$key] = array(
-					'type' => 'INT',
-					'unsigned' => true
-				);
-			} elseif ($val === 'string') {
-				$fields[$key] = array(
-					'type' => 'TEXT'
-				);
-			} elseif ($val === 'bool') {
-				$fields[$key] = array(
-					'type' => 'CHAR',
-					'length' => 1,
-					'default' => 'n'
-				);
-			}
-		}
-
-		Table::insert($fields, static::$_table_name);
-	}
-
-	/**
-	 * Uninstall model
-	 */
-	public function uninstall()
-	{
-		if (! ee()->db->table_exists(static::$_table_name)) {
-			return;
-		}
-
-		Table::remove(static::$_table_name);
-	}
-
-	/**
 	 * Required Iterator methods
 	 */
-	public function current() {
+	public function current()
+	{
 		return $this->{$this->itteratorKeys[$this->position]};
 	}
 
-	function key() {
+	function key()
+	{
 		return $this->itteratorKeys[$this->position];
 	}
 
-	function next() {
+	function next()
+	{
 		++$this->position;
 	}
 
-	function rewind() {
+	function rewind()
+	{
 		$this->position = 0;
 	}
 
-	function valid() {
+	function valid()
+	{
 		return isset($this->itteratorKeys[$this->position]);
 	}
 }

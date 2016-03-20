@@ -18,6 +18,7 @@ class Installer
 {
 	private $moduleInstaller;
 	private $fieldTypeInstaller;
+	private $modelInstaller;
 
 	/**
 	 * Installer constructor
@@ -27,9 +28,6 @@ class Installer
 		// Load services
 		$this->moduleInstaller = new Install\ModuleInstaller();
 		$this->fieldTypeInstaller = new Install\FieldTypeInstaller();
-
-		// Load models
-		$this->seoMasterData = new Model\SeoMasterData();
 	}
 
 	/**
@@ -38,7 +36,7 @@ class Installer
 	public function install()
 	{
 		// Install SeoMasterData model
-		$this->seoMasterData->install();
+		Model\Installer::install('SeoMasterData');
 
 		// Add module
 		$this->moduleInstaller->add();
@@ -50,7 +48,7 @@ class Installer
 	public function uninstall()
 	{
 		// Uninstall SeoMasterData model
-		$this->seoMasterData->uninstall();
+		Model\Installer::uninstall('SeoMasterData');
 
 		// Remove Module
 		$this->moduleInstaller->remove();

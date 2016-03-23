@@ -33,13 +33,23 @@ class DataTagData extends Base
 			$model->title = $entryTitle->title;
 		}
 
+		$useTitleSuffix = $model->use_title_suffix;
+
+		if ($tagParams->use_title_suffix_override) {
+			$useTitleSuffix = true;
+		}
+
+		$useTitleSuffix = $model->use_title_suffix;
+
+		if (! $useTitleSuffix) {
+			$useTitleSuffix = $tagParams->use_title_suffix_fallback;
+		}
+
 		$data = array(
 			'no_index' => $tagParams->no_index_override ||
 				$model->no_index_override ||
 				$tagParams->no_index_fallback,
-			'use_title_suffix' => $tagParams->use_title_suffix_override ||
-				$model->use_title_suffix ||
-				$tagParams->use_title_suffix_fallback,
+			'use_title_suffix' => $useTitleSuffix,
 			'title' => $tagParams->title_override ?:
 				($model->title ?: $tagParams->title_fallback),
 			'description' => $tagParams->description_override ?:

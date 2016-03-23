@@ -21,8 +21,18 @@
 	.inline-block();
 	.padding(6px; 10px);
 	.rounded(3px);
+	.user-select();
 	&:hover {
 		.background(darken(#f5f6f5, 8%));
+	}
+}
+.seomaster-close-btn {
+	.circle(18px);
+	.cursor();
+	.shadow(dark; 30%; 1px; 1px; 3px);
+	.z-index(10);
+	&:hover {
+		.background-position(-18px; 0);
 	}
 }
 .seomaster-radio-label {
@@ -46,6 +56,13 @@
 	}
 	&__input-wrapper {
 		.spaced(20px);
+	}
+	&__share-image-thumb {
+		.margin(top; 4px);
+		.relative();
+	}
+	&__thumb-delete {
+		.absolute(-5px; false; false; -5px);
 	}
 }
 .seomaster-count {

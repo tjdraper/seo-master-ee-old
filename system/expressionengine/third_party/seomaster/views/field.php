@@ -128,14 +128,14 @@
 			<label class="seomaster-field__label">
 				<?= lang('field_add_share_image_label') ?>
 			</label>
-			<input type="hidden" name="<?= $fieldSettings->field_name ?>[image]" value="<?= $fieldData->image ?>" class="js-seomaster-image">
-			<div class="seomaster-field__share-image-thumb"></div>
-			<span
-				class="seomaster-btn js-seomaster-add-image"
-				data-add="<?= lang('field_add_share_image') ?>"
-				data-remove="<?= lang('field_remove_share_image') ?>"
-				data-has-image="<?= $fieldData->image ? 'true' : 'false' ?>"
-			>
+			<input type="hidden" name="<?= $fieldSettings->field_name ?>[image]" value="<?php if ($fieldData->image->file_id) { ?><?= $fieldData->image->file_id ?><?php } ?>" class="js-seomaster-image">
+			<div class="seomaster-field__share-image-thumb<?php if (! $fieldData->image->file_id) { ?> js-hide<?php } ?> js-seomaster-thumb-wrapper">
+				<span class="seomaster-close-btn seomaster-field__thumb-delete js-thumb-delete"></span>
+				<div class="js-seomaster-image-thumb">
+					<img src="<?= $fieldData->image->upload_location_url ?>_thumbs/<?= $fieldData->image->file_name ?>">
+				</div>
+			</div>
+			<span class="seomaster-btn js-seomaster-add-image<?php if ($fieldData->image->file_id) { ?> js-hide<?php } ?>">
 				<?= lang('field_add_share_image') ?>
 			</span>
 		</div>

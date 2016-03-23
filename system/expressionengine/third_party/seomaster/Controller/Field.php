@@ -36,6 +36,23 @@ class Field
 			->filter('site_id', $this->fieldSettings->site_id)
 			->filter('entry_id', $this->fieldSettings->content_id)
 			->first();
+
+		// Start styles
+		$css = '<style type="text/css">';
+		$closeBtn = URL_THIRD_THEMES . 'seomaster/img/close-button.png';
+		$closeBtn2x = URL_THIRD_THEMES . 'seomaster/img/close-button-2x.png';
+
+		// Add close button
+		$css .= ".seomaster-close-btn {background-image: url({$closeBtn});}";
+		$css .= "@media only screen and (-webkit-min-device-pixel-ratio: 1.3), (min--moz-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {";
+		$css .= ".seomaster-close-btn {background-image: url({$closeBtn2x});}";
+		$css .= "}";
+
+		// End styles
+		$css .= '</style>';
+
+		// Send the CSS output to the browser
+		ee()->cp->add_to_head($css);
 	}
 
 	/**

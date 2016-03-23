@@ -11,6 +11,8 @@
 
 namespace BuzzingPixel\SeoMaster\Model;
 
+use BuzzingPixel\SeoMaster\Service\Data\EEFile;
+
 class SeoMasterData extends Base
 {
 	// Metadata
@@ -37,4 +39,23 @@ class SeoMasterData extends Base
 		'description' => 'string',
 		'image' => 'string'
 	);
+
+	/**
+	 * Get the EEFile model on image set
+	 *
+	 * @param int $id
+	 * @return object EEFile class
+	 */
+	protected function image__onSet($id)
+	{
+		return new EEFile($id);
+	}
+
+	/**
+	 * Format the image for saving to the database
+	 */
+	protected function image__onSave()
+	{
+		return $this->image->file_id;
+	}
 }

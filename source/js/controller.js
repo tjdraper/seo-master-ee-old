@@ -6,7 +6,8 @@
 			'chosen'
 		],
 		fieldType: [
-			'charLimit'
+			'charLimit',
+			'addShareImage'
 		]
 	};
 })(window.SEOMASTER);

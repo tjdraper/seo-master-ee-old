@@ -52,6 +52,21 @@ class SeoMasterData extends Base
 	}
 
 	/**
+	 * Make sure the image is EEFile model
+	 *
+	 * @param int $image
+	 * @return object EEFile class
+	 */
+	protected function image__onGet($image)
+	{
+		if (! $image instanceof EEFile) {
+			$image = new EEFile(null);
+		}
+
+		return $image;
+	}
+
+	/**
 	 * Format the image for saving to the database
 	 */
 	protected function image__onSave()

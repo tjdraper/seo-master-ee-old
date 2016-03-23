@@ -25,6 +25,14 @@ class DataTagData extends Base
 		\BuzzingPixel\SeoMaster\Service\Params\DataTagParams $tagParams
 	)
 	{
+		if (! $model->title) {
+			$entryTitle = new Model('EntryTitle');
+			$entryTitle = $entryTitle->filter('entry_id', 'IN', $model->id)
+				->first();
+
+			$model->title = $entryTitle->title;
+		}
+
 		$data = array(
 			'no_index' => $tagParams->no_index_override ||
 				$model->no_index_override ||
@@ -43,14 +51,6 @@ class DataTagData extends Base
 			'twitter_card' => $tagParams->twitter_card,
 			'twitter_site' => $tagParams->twitter_site
 		);
-
-		if (! $data['title']) {
-			$entryTitle = new Model('EntryTitle');
-			$entryTitle = $entryTitle->filter('entry_id', 'IN', $model->id)
-				->first();
-
-			$data['title'] = $entryTitle->title;
-		}
 
 		$this->setup($data);
 	}

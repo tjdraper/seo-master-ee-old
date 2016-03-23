@@ -150,6 +150,6 @@ class Seomaster_ft extends EE_Fieldtype
 		$tagParams['entry_id'] = $this->content_id;
 
 		$field = new Controller\Tag();
-		return $field->data($tagParams, $tagData);
+		return $field->header_tags($tagParams, $tagData);
 	}
 }

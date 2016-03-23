@@ -21,7 +21,7 @@ class Seomaster
 	 *
 	 * @return string
 	 */
-	public function data()
+	public function header_tags()
 	{
 		$tagParams = ee()->TMPL->tagparams ?: array();
 		$tagData = ee()->TMPL->tagdata ?: '';
@@ -31,6 +31,6 @@ class Seomaster
 		}
 
 		$field = new Controller\Tag();
-		return $field->data($tagParams, $tagData);
+		return $field->header_tags($tagParams, $tagData);
 	}
 }

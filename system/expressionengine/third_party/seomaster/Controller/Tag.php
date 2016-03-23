@@ -24,7 +24,7 @@ class Tag
 	 * @param array $tagData
 	 * @return string
 	 */
-	public function data($tagParams, $tagData)
+	public function header_tags($tagParams, $tagData)
 	{
 		// Get tag params
 		$tagParams = new DataTagParams($tagParams);

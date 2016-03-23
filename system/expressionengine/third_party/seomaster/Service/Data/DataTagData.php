@@ -48,6 +48,8 @@ class DataTagData extends Base
 			$entryTitle = new Model('EntryTitle');
 			$entryTitle = $entryTitle->filter('entry_id', 'IN', $model->id)
 				->first();
+
+			$data['title'] = $entryTitle->title;
 		}
 
 		$this->setup($data);

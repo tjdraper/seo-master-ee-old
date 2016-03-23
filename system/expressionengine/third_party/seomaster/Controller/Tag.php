@@ -14,6 +14,7 @@ namespace BuzzingPixel\SeoMaster\Controller;
 use BuzzingPixel\SeoMaster\Model\Model;
 use BuzzingPixel\SeoMaster\Service\Params\DataTagParams;
 use BuzzingPixel\SeoMaster\Service\Data\DataTagData;
+use BuzzingPixel\SeoMaster\Service\Vars\VarPrepare;
 
 class Tag
 {
@@ -29,6 +30,42 @@ class Tag
 		// Get tag params
 		$tagParams = new DataTagParams($tagParams);
 
+		return ee()->load->view(
+			'data',
+			$this->getTagData($tagParams, $tagData),
+			true
+		);
+	}
+
+	/**
+	 * Tag pair
+	 *
+	 * @param array $tagParams
+	 * @param array $tagData
+	 * @return string
+	 */
+	public function pair($tagParams, $tagData)
+	{
+		// Get tag params
+		$tagParams = new DataTagParams($tagParams);
+
+		$data = $this->getTagData($tagParams, $tagData);
+
+		return ee()->TMPL->parse_variables(
+			$tagData,
+			VarPrepare::process($data, $tagParams->namespace ?: 'seo')
+		);
+	}
+
+	/**
+	 * Get data for tag(s)
+	 *
+	 * @param array $tagParams
+	 * @param array $tagData
+	 * @return object
+	 */
+	private function getTagData($tagParams, $tagData)
+	{
 		// Get model data
 		$model = new Model('SeoMasterData');
 
@@ -91,8 +128,6 @@ class Tag
 
 		$model = $model->first();
 
-		$data = new DataTagData($model, $tagParams);
-
-		return ee()->load->view('data', $data, true);
+		return new DataTagData($model, $tagParams);
 	}
 }

@@ -19,7 +19,8 @@ class BlankSlate
 	 * @param string $name Class variable name
 	 * @return mixed
 	 */
-	public function __get($name) {
+	public function __get($name)
+	{
 		if (! isset($this->{$name})) {
 			return null;
 		}

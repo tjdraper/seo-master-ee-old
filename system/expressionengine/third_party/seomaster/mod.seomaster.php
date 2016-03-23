@@ -33,4 +33,22 @@ class Seomaster
 		$field = new Controller\Tag();
 		return $field->header_tags($tagParams, $tagData);
 	}
+
+	/**
+	 * Pair tag
+	 *
+	 * @return string
+	 */
+	public function pair()
+	{
+		$tagParams = ee()->TMPL->tagparams ?: array();
+		$tagData = ee()->TMPL->tagdata ?: '';
+
+		if (! isset($tagParams['side_id'])) {
+			$tagParams['site_id'] = ee()->config->item('site_id');
+		}
+
+		$field = new Controller\Tag();
+		return $field->pair($tagParams, $tagData);
+	}
 }

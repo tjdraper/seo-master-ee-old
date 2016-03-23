@@ -43,9 +43,27 @@ abstract class Base implements \Iterator
 	{
 		if (
 			property_exists($this, $name) &&
-			strpos($this->{$name}, '_') !== 0
+			strpos($name, '_') !== 0
 		) {
-			return $this->{$name};
+			$value = $this->{$name};
+
+			// Check for onGet method
+			$modelMethods = get_class_methods($this);
+
+			// Loop through the model methods
+			foreach ($modelMethods as $methodName) {
+				// Explode the name to look for onSet
+				$check = explode('__', $methodName);
+
+				// Check if we have a method to run for onSet
+				if (count($check) === 2 && $check[0] === $name && $check[1] === 'onGet') {
+					$value = $this->{$methodName}($value);
+
+					break;
+				}
+			}
+
+			return $value;
 		}
 	}
 
@@ -64,13 +82,31 @@ abstract class Base implements \Iterator
 			return;
 		}
 
+		// Make sure property exists and is not private
 		if (property_exists($this, $name) && strpos($value, '_') !== 0) {
 			$type = $this::$_typed_columns[$name];
 
+			// Cast value properly
 			if ($type === 'int') {
 				$value = (int) $value;
 			} elseif ($type === 'bool') {
 				$value = $value === 'y';
+			}
+
+			// Check for onSet method
+			$modelMethods = get_class_methods($this);
+
+			// Loop through the model methods
+			foreach ($modelMethods as $methodName) {
+				// Explode the name to look for onSet
+				$check = explode('__', $methodName);
+
+				// Check if we have a method to run for onSet
+				if (count($check) === 2 && $check[0] === $name && $check[1] === 'onSet') {
+					$value = $this->{$methodName}($value);
+
+					break;
+				}
 			}
 
 			$this->{$name} = $value;
@@ -97,6 +133,25 @@ abstract class Base implements \Iterator
 		// Set data to be updated
 		$updateData = $this->asArray(true);
 		unset($updateData['id']);
+
+		// Get model methods
+		$modelMethods = get_class_methods($this);
+
+		// Check for onSave methods
+		foreach ($updateData as $key => $val) {
+			// Loop through the model methods
+			foreach ($modelMethods as $methodName) {
+				// Explode the name to look for onSet
+				$check = explode('__', $methodName);
+
+				// Check if we have a method to run for onSet
+				if (count($check) === 2 && $check[0] === $key && $check[1] === 'onSave') {
+					$updateData[$key] = $this->{$methodName}();
+
+					break;
+				}
+			}
+		}
 
 		// Create new record if there is no id
 		if (! $this->id) {

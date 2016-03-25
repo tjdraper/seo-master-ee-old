@@ -42,11 +42,20 @@ class UploadDirectories extends Base
 	{
 		ee()->load->library('filemanager');
 
-		$dirs = ee()->filemanager->fetch_upload_dirs();
+		$dirs = ee('Model')->get('UploadDestination')
+			->filter('module_id', 0)
+			->all();
 
 		$sortedDirs = array();
 
 		foreach ($dirs as $val) {
+			$val = $val->toArray();
+
+			if (gettype($val['server_path']) === 'object') {
+				$path = $val['server_path'];
+				$val['server_path'] = $path->path;
+			}
+
 			foreach ($val as $key => $item) {
 				if ($key === 'id' || $key === 'site_id') {
 					$val[$key] = (int) $item;

@@ -62,11 +62,28 @@ class Field
 	 */
 	public function render()
 	{
+		// Get share image btn
+		$class = 'btn action js-seomaster-add-image';
+
+		if ($this->fieldData->image->file_id) {
+			$class .= ' js-hide';
+		}
+
+		$shareImageBtn = ee('CP/FilePicker')->make()
+			->setDirectories($this->fieldSettings->share_image_upload_dir)
+			->getLink(lang('field_add_share_image'))
+			->setAttribute('class', $class)
+			->asThumbs()
+			->enableFilters()
+			->enableUploads()
+			->render();
+
 		return ee()->load->view(
 			'field',
 			array(
 				'fieldSettings' => $this->fieldSettings,
-				'fieldData' => $this->fieldData
+				'fieldData' => $this->fieldData,
+				'shareBtn' => $shareImageBtn
 			),
 			true
 		);

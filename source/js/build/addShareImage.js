@@ -7,21 +7,29 @@
 			var $imgInput = $('.js-seomaster-image');
 			var $thumbWrapper = $('.js-seomaster-thumb-wrapper');
 
-			// jscs:disable
-			$.ee_filebrowser.add_trigger($btn, $btn, { // jshint ignore:line
-				content_type: 'image', // jshint ignore:line
-				directory: this.uploadDirectory
-			}, function(file) {
-				var img = new Image();
-				img.src = file.thumb;
+			// When the FilePicker delivers a file
+			$btn.FilePicker({
+				callback: function(file, references) {
+					// Create a new image
+					var img = new Image();
+					// jscs:disable
+					img.src = file.thumb_path; // jshint ignore:line
 
-				$imgInput.val(file.file_id); // jshint ignore:line
-				$('.js-seomaster-image-thumb').html(img);
-				$thumbWrapper.jsShow();
+					// Set the file id to the image input
+					$imgInput.val(file.file_id); // jshint ignore:line
+					// jscs:enable
 
-				$btn.jsHide();
+					// Show the image thumbnail
+					$('.js-seomaster-image-thumb').html(img);
+					$thumbWrapper.jsShow();
+
+					// Hide the add image button
+					$btn.jsHide();
+
+					// Close the modal
+					references.modal.find('.m-close').click();
+				}
 			});
-			// jscs:enable
 
 			$('.js-thumb-delete').on('click', function() {
 				$imgInput.val('');

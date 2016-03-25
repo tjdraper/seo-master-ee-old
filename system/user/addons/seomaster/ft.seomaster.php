@@ -66,7 +66,11 @@ class Seomaster_ft extends EE_Fieldtype
 	{
 		// Load the controller and render
 		$fieldSettings = new Controller\FieldSettings($data);
-		$fieldSettings->render();
+		return array('field_options_seomaster' => array(
+			'label' => 'field_options',
+			'group' => 'seomaster',
+			'settings' => $fieldSettings->render()
+		));
 	}
 
 	/**

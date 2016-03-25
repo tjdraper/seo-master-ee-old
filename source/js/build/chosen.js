@@ -6,13 +6,19 @@
 			var self = this;
 			var $sel = $('select[name="field_type"]');
 
-			$sel.on('change.seomaster', function() {
-				if ($(this).val() === 'seomaster') {
-					self.run();
+			self.check($sel);
 
-					$sel.off('change.seomaster');
-				}
+			$sel.on('change.seomaster', function() {
+				self.check($sel);
 			});
+		},
+
+		check: function($sel) {
+			if ($sel.val() === 'seomaster') {
+				this.run();
+
+				$sel.off('change.seomaster');
+			}
 		},
 
 		run: function() {

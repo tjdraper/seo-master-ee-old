@@ -6,26 +6,30 @@
 			<label class="seomaster-field__label">
 				<?= lang('field_seo_no_index') ?>
 			</label>
-			<input
-				type="radio"
-				name="<?= $fieldSettings->field_name ?>[no_index]"
-				value="n"
-				id="no_index_no"
-				<?php if ($fieldData->no_index === null || $fieldData->no_index === false) { ?>
-				checked
-				<?php } ?>
-			>
-			<label for="no_index_no" class="seomaster-radio-label"><?= lang('field_seo_no_index_index') ?></label>
-			<input
-				type="radio"
-				name="<?= $fieldSettings->field_name ?>[no_index]"
-				value="y"
-				id="no_index_yes"
-				<?php if ($fieldData->no_index === true) { ?>
-				checked
-				<?php } ?>
-			>
-			<label for="no_index_yes" class="seomaster-radio-label"><?= lang('field_seo_no_index_no_index') ?></label>
+			<div class="seomaster-field__inputs">
+				<label class="choice mr<?php if ($fieldData->no_index === null || $fieldData->no_index === false) { ?> chosen<?php } ?>">
+					<input
+						type="radio"
+						name="<?= $fieldSettings->field_name ?>[no_index]"
+						value="n"
+						<?php if ($fieldData->no_index === null || $fieldData->no_index === false) { ?>
+						checked
+						<?php } ?>
+					>
+					<?= lang('field_seo_no_index_index') ?>
+				</label>
+				<label class="choice mr<?php if ($fieldData->no_index === true) { ?> chosen<?php } ?>">
+					<input
+						type="radio"
+						name="<?= $fieldSettings->field_name ?>[no_index]"
+						value="y"
+						<?php if ($fieldData->no_index === true) { ?>
+						checked
+						<?php } ?>
+					>
+					<?= lang('field_seo_no_index_no_index') ?>
+				</label>
+			</div>
 		</div>
 	<?php } ?>
 
@@ -35,26 +39,30 @@
 			<label class="seomaster-field__label">
 				<?= lang('field_seo_title_suffix') ?>
 			</label>
-			<input
-				type="radio"
-				name="<?= $fieldSettings->field_name ?>[use_title_suffix]"
-				value="y"
-				id="use_title_suffix_yes"
-				<?php if ($fieldData->use_title_suffix === null || $fieldData->use_title_suffix === true) { ?>
-				checked
-				<?php } ?>
-			>
-			<label for="use_title_suffix_yes" class="seomaster-radio-label"><?= lang('yes') ?></label>
-			<input
-				type="radio"
-				name="<?= $fieldSettings->field_name ?>[use_title_suffix]"
-				value="n"
-				id="use_title_suffix_no"
-				<?php if ($fieldData->use_title_suffix === false) { ?>
-				checked
-				<?php } ?>
-			>
-			<label for="use_title_suffix_no" class="seomaster-radio-label"><?= lang('no') ?></label>
+			<div class="seomaster-field__inputs">
+				<label class="choice mr<?php if ($fieldData->use_title_suffix === null || $fieldData->use_title_suffix === true) { ?> chosen<?php } ?>">
+					<input
+						type="radio"
+						name="<?= $fieldSettings->field_name ?>[use_title_suffix]"
+						value="y"
+						<?php if ($fieldData->use_title_suffix === null || $fieldData->use_title_suffix === true) { ?>
+						checked
+						<?php } ?>
+					>
+					<?= lang('yes') ?>
+				</label>
+				<label class="choice mr<?php if ($fieldData->use_title_suffix === false) { ?> chosen<?php } ?>">
+					<input
+						type="radio"
+						name="<?= $fieldSettings->field_name ?>[use_title_suffix]"
+						value="n"
+						<?php if ($fieldData->use_title_suffix === false) { ?>
+						checked
+						<?php } ?>
+					>
+					<?= lang('no') ?>
+				</label>
+			</div>
 		</div>
 	<?php } ?>
 
@@ -80,7 +88,7 @@
 				<?php if ($fieldSettings->title_max_length) { ?>
 				maxlength="<?= $fieldSettings->title_max_length ?>"
 				<?php } ?>
-				class="js-seomaster-input"
+				class="seomaster-field__input js-seomaster-input"
 				id="$fieldSettings->field_name ?>[title]"
 			>
 			<?php if ($fieldSettings->title_max_length) { ?>
@@ -110,7 +118,7 @@
 				maxlength="<?= $fieldSettings->description_max_length ?>"
 				<?php } ?>
 				rows="3"
-				class="js-seomaster-input"
+				class="seomaster-field__input js-seomaster-input"
 				id="$fieldSettings->field_name ?>[description]"
 			><?= $fieldData->description ?></textarea>
 			<?php if ($fieldSettings->description_max_length) { ?>
@@ -137,7 +145,9 @@
 					<?php } ?>
 				</div>
 			</div>
-			<?= $shareBtn ?>
+			<div class="seomaster-field__share-img-btn-wrapper">
+				<?= $shareBtn ?>
+			</div>
 		</div>
 	<?php } ?>
 

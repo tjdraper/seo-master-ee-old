@@ -3,6 +3,19 @@
 
 	F.fn.make('chosen', {
 		init: function() {
+			var self = this;
+			var $sel = $('select[name="field_type"]');
+
+			$sel.on('change.seomaster', function() {
+				if ($(this).val() === 'seomaster') {
+					self.run();
+
+					$sel.off('change.seomaster');
+				}
+			});
+		},
+
+		run: function() {
 			var $chosenSelects = $('.js-seomaster-chosen');
 
 			// If there are no chosen selects, we have nothing to do

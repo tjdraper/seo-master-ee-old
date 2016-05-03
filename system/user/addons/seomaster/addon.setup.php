@@ -6,7 +6,7 @@ defined('SEOMASTER_DESCRIPTION') || define('SEOMASTER_DESCRIPTION', 'Take charge
 defined('SEOMASTER_DOCS_URL') || define('SEOMASTER_DOCS_URL', 'https://buzzingpixel.com/software/seomaster/documentation');
 defined('SEOMASTER_NAME') || define('SEOMASTER_NAME', 'SEO Master');
 defined('SEOMASTER_NAMESPACE') || define('SEOMASTER_NAMESPACE', 'BuzzingPixel\SeoMaster');
-defined('SEOMASTER_VER') || define('SEOMASTER_VER', '1.0.1');
+defined('SEOMASTER_VER') || define('SEOMASTER_VER', '1.0.2');
 
 return array(
 	'author' => SEOMASTER_AUTHOR,

@@ -20,7 +20,7 @@ class FieldTypeInstaller
 	{
 		ee()->db->where('name', 'seomaster');
 		ee()->db->update('fieldtypes', array(
-			'version' => SIMPLETAG_VER
+			'version' => SEOMASTER_VER
 		));
 	}
 }

@@ -27,6 +27,13 @@ class Field
 	 */
 	public function __construct($fieldSettings)
 	{
+		// Set JS variables
+		ee()->javascript->output(
+			"window.SEOMASTER = window.SEOMASTER || {};" .
+			"window.SEOMASTER.vars = window.SEOMASTER.vars || {};" .
+			"window.SEOMASTER.vars.pageType = 'fieldType';"
+		);
+
 		// Get settings object
 		$this->fieldSettings = new FieldSettings($fieldSettings);
 

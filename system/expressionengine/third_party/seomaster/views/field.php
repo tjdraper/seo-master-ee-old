@@ -1,4 +1,4 @@
-<div class="seomaster-field" data-set="pageType" data-value="fieldType">
+<div class="seomaster-field">
 
 	<?php // No Index ?>
 	<?php if ($fieldSettings->display_indexing) { ?>
